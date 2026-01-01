@@ -4,6 +4,15 @@ server:
 spring:
   application:
     name: gateway
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: order-service
+              uri: lb://order-service
+              predicates:
+                - Path=/orders/**
 
 eureka:
   client:
