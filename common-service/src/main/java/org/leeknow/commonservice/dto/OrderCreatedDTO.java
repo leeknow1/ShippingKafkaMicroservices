@@ -1,4 +1,4 @@
-package org.leeknow.orderservice.dto;
+package org.leeknow.commonservice.dto;
 
 import lombok.Data;
 

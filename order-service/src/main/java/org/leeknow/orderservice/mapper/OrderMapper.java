@@ -1,6 +1,6 @@
 package org.leeknow.orderservice.mapper;
 
-import org.leeknow.orderservice.dto.OrderCreatedDTO;
+import org.leeknow.commonservice.dto.OrderCreatedDTO;
 import org.leeknow.orderservice.dto.OrderDTO;
 import org.leeknow.orderservice.entity.Order;
 import org.leeknow.orderservice.enums.OrderStatus;

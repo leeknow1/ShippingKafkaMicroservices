@@ -7,6 +7,8 @@
         <option value="$PROJECT_DIR$/shipping-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/shipping-registry/pom.xml" />
         <option value="$PROJECT_DIR$/order-service/pom.xml" />
+        <option value="$PROJECT_DIR$/payment-service/pom.xml" />
+        <option value="$PROJECT_DIR$/common-service/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

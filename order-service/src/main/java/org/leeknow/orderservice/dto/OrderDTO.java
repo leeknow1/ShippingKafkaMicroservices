@@ -1,7 +1,6 @@
 package org.leeknow.orderservice.dto;
 
 import lombok.Data;
-import org.leeknow.orderservice.enums.OrderStatus;
 
 @Data
 public class OrderDTO {

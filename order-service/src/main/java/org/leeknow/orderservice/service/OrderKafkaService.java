@@ -1,7 +1,7 @@
 package org.leeknow.orderservice.service;
 
 import lombok.RequiredArgsConstructor;
-import org.leeknow.orderservice.dto.OrderCreatedDTO;
+import org.leeknow.commonservice.dto.OrderCreatedDTO;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 

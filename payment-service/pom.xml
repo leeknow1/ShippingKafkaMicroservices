@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.leeknow</groupId>
-    <artifactId>order-service</artifactId>
+    <artifactId>payment-service</artifactId>
     <version>0.0.1</version>
-    <name>order-service</name>
-    <description>order-service</description>
+    <name>payment-service</name>
+    <description>payment-service</description>
     <url/>
     <licenses>
         <license/>
