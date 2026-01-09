@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.leeknow.paymentservice.enums.PaymentStatus;
+import org.leeknow.commonservice.enums.PaymentStatus;
 
 import java.sql.Timestamp;
 
@@ -29,4 +29,6 @@ public class Payment {
     private Timestamp completed;
 
     private Integer orderId;
+
+    private Integer userId;
 }

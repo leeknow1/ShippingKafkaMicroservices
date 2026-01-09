@@ -1,4 +1,4 @@
-package org.leeknow.paymentservice.enums;
+package org.leeknow.commonservice.enums;
 
 import lombok.Getter;
 

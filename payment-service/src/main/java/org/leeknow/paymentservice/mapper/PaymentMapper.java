@@ -1,7 +1,7 @@
 package org.leeknow.paymentservice.mapper;
 
 import org.leeknow.commonservice.dto.OrderCreatedDTO;
-import org.leeknow.paymentservice.dto.PaymentCreatedDTO;
+import org.leeknow.commonservice.dto.PaymentCreatedDTO;
 import org.leeknow.paymentservice.entity.Payment;
 
 import java.sql.Timestamp;
@@ -12,6 +12,7 @@ public class PaymentMapper {
         Payment payment = new Payment();
         payment.setCreated(new Timestamp(System.currentTimeMillis()));
         payment.setOrderId(Integer.valueOf(dto.getOrderId()));
+        payment.setUserId(dto.getUserId());
         return payment;
     }
 
@@ -20,6 +21,7 @@ public class PaymentMapper {
         dto.setPaymentId(payment.getPaymentId().toString());
         dto.setStatus(payment.getStatus().name());
         dto.setOrderId(payment.getOrderId());
+        dto.setUserId(payment.getUserId());
         return dto;
     }
 }

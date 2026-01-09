@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.leeknow.orderservice.enums.OrderStatus;
+import org.leeknow.commonservice.enums.OrderStatus;
 
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
@@ -30,5 +32,5 @@ public class Order {
 
     private Integer amount;
 
-    private Timestamp created;
+    private LocalDateTime created;
 }

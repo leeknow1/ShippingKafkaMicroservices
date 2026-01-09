@@ -1,4 +1,4 @@
-package org.leeknow.paymentservice.dto;
+package org.leeknow.commonservice.dto;
 
 import lombok.Data;
 
@@ -6,8 +6,7 @@ import lombok.Data;
 public class PaymentCreatedDTO {
 
     private String paymentId;
-
     private String status;
-
     private Integer orderId;
+    private Integer userId;
 }

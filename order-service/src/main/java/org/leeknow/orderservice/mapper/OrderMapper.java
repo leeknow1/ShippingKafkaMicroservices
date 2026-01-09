@@ -3,9 +3,12 @@ package org.leeknow.orderservice.mapper;
 import org.leeknow.commonservice.dto.OrderCreatedDTO;
 import org.leeknow.orderservice.dto.OrderDTO;
 import org.leeknow.orderservice.entity.Order;
-import org.leeknow.orderservice.enums.OrderStatus;
+import org.leeknow.commonservice.enums.OrderStatus;
 
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class OrderMapper {
 
@@ -24,7 +27,7 @@ public class OrderMapper {
         order.setOrderStatus(OrderStatus.CREATED);
         order.setAmount(dto.getAmount());
         order.setItemId(dto.getItemId());
-        order.setCreated(new Timestamp(System.currentTimeMillis()));
+        order.setCreated(LocalDateTime.now());
         return order;
     }
 }

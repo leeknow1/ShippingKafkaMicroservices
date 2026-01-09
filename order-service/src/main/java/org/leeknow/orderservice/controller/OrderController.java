@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.leeknow.orderservice.dto.OrderDTO;
 import org.leeknow.orderservice.service.OrderService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,6 +16,12 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<?> saveOrder(@RequestBody OrderDTO orderDTO) {
         service.save(orderDTO);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getOrder(@PathVariable int id) {
+        //TODO service.find(id);
         return ResponseEntity.ok().build();
     }
 }
