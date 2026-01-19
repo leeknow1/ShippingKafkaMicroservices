@@ -1,10 +1,10 @@
 package org.leeknow.paymentservice.service;
 
 import lombok.RequiredArgsConstructor;
-import org.leeknow.commonservice.dto.OrderCreatedDTO;
-import org.leeknow.commonservice.dto.PaymentCreatedDTO;
+import org.leeknow.commonservice.order.dto.OrderCreatedDTO;
+import org.leeknow.commonservice.payment.dto.PaymentCreatedDTO;
 import org.leeknow.paymentservice.entity.Payment;
-import org.leeknow.commonservice.enums.PaymentStatus;
+import org.leeknow.commonservice.payment.enums.PaymentStatus;
 import org.leeknow.paymentservice.repository.PaymentRepository;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;

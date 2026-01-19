@@ -1,7 +1,7 @@
 package org.leeknow.notificationservice.service;
 
 import lombok.RequiredArgsConstructor;
-import org.leeknow.commonservice.dto.PaymentCreatedDTO;
+import org.leeknow.commonservice.payment.dto.PaymentCreatedDTO;
 import org.leeknow.notificationservice.entity.Notification;
 import org.leeknow.notificationservice.repository.NotificationRepository;
 import org.springframework.kafka.annotation.KafkaListener;

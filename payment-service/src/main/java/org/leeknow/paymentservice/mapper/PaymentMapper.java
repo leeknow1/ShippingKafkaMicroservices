@@ -1,7 +1,8 @@
 package org.leeknow.paymentservice.mapper;
 
-import org.leeknow.commonservice.dto.OrderCreatedDTO;
-import org.leeknow.commonservice.dto.PaymentCreatedDTO;
+import org.leeknow.commonservice.order.dto.OrderCreatedDTO;
+import org.leeknow.commonservice.payment.dto.PaymentCreatedDTO;
+import org.leeknow.commonservice.payment.dto.PaymentDTO;
 import org.leeknow.paymentservice.entity.Payment;
 
 import java.sql.Timestamp;
@@ -22,6 +23,14 @@ public class PaymentMapper {
         dto.setStatus(payment.getStatus().name());
         dto.setOrderId(payment.getOrderId());
         dto.setUserId(payment.getUserId());
+        return dto;
+    }
+
+    public static PaymentDTO mapToDTO(Payment payment) {
+        PaymentDTO dto = new PaymentDTO();
+        dto.setStatus(payment.getStatus());
+        dto.setCreated(payment.getCreated());
+        dto.setCompleted(payment.getCompleted());
         return dto;
     }
 }

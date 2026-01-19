@@ -1,6 +1,6 @@
 package org.leeknow.notificationservice.mapper;
 
-import org.leeknow.commonservice.dto.PaymentCreatedDTO;
+import org.leeknow.commonservice.payment.dto.PaymentCreatedDTO;
 import org.leeknow.notificationservice.entity.Notification;
 import org.leeknow.notificationservice.enums.NotificationStatus;
 

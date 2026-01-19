@@ -1,6 +1,7 @@
 package org.leeknow.orderservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.leeknow.commonservice.order.dto.OrderWithPaymentDTO;
 import org.leeknow.orderservice.dto.OrderDTO;
 import org.leeknow.orderservice.service.OrderService;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,10 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getOrder(@PathVariable int id) {
-        //TODO service.find(id);
-        return ResponseEntity.ok().build();
+        OrderWithPaymentDTO orderWithPaymentDTO = service.find(id);
+        if (orderWithPaymentDTO == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(orderWithPaymentDTO);
     }
 }

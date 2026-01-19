@@ -1,14 +1,13 @@
 package org.leeknow.orderservice.mapper;
 
-import org.leeknow.commonservice.dto.OrderCreatedDTO;
+import org.leeknow.commonservice.order.dto.OrderCreatedDTO;
+import org.leeknow.commonservice.order.dto.OrderWithPaymentDTO;
+import org.leeknow.commonservice.payment.dto.PaymentDTO;
 import org.leeknow.orderservice.dto.OrderDTO;
 import org.leeknow.orderservice.entity.Order;
-import org.leeknow.commonservice.enums.OrderStatus;
+import org.leeknow.commonservice.order.enums.OrderStatus;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 public class OrderMapper {
 
@@ -29,5 +28,16 @@ public class OrderMapper {
         order.setItemId(dto.getItemId());
         order.setCreated(LocalDateTime.now());
         return order;
+    }
+
+    public static OrderWithPaymentDTO mapToOrderWithPayment(Order order, PaymentDTO paymentDTO) {
+        OrderWithPaymentDTO dto = new OrderWithPaymentDTO();
+        dto.setUserId(order.getUserId());
+        dto.setOrderStatus(order.getOrderStatus());
+        dto.setAmount(order.getAmount());
+        dto.setItemId(order.getItemId());
+        dto.setCreated(order.getCreated());
+        dto.setPayment(paymentDTO);
+        return dto;
     }
 }
