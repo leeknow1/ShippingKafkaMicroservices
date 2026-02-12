@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: gateway
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "http://localhost:8084/.well-known/jwks.json"
   cloud:
     gateway:
       server:
@@ -13,6 +18,10 @@ spring:
               uri: lb://order-service
               predicates:
                 - Path=/orders/**
+            - id: auth-service
+              uri: lb://user-service
+              predicates:
+                - Path=/auth/**
 
 eureka:
   client:
