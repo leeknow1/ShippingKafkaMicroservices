@@ -28,6 +28,6 @@ public class AuthController {
 
         if (userDTO == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
-        return ResponseEntity.ok(tokenService.generateAccessToken(userDTO.getEmail(), userDTO.getRoles()));
+        return ResponseEntity.ok(tokenService.generateAccessToken(userDTO.getUserId(), userDTO.getRoles()));
     }
 }

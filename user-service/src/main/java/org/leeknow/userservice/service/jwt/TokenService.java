@@ -29,11 +29,11 @@ public class TokenService {
         this.validityPeriod = validityPeriod;
     }
 
-    public String generateAccessToken(String email, List<String> roles) throws JOSEException {
+    public String generateAccessToken(Integer userId, List<String> roles) throws JOSEException {
         Instant now = Instant.now();
 
         JWTClaimsSet claims = new JWTClaimsSet.Builder()
-                .subject(email)
+                .subject(userId.toString())
                 .issuer(issuer)
                 .expirationTime(Date.from(now.plusSeconds(validityPeriod)))
                 .claim("roles", roles)

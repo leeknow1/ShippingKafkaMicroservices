@@ -7,6 +7,6 @@ import java.util.List;
 @Data
 public class UserDTO {
 
-    private String email;
+    private Integer userId;
     private List<String> roles;
 }
