@@ -3,6 +3,7 @@ package org.leeknow.orderservice.mapper;
 import org.leeknow.commonservice.order.dto.OrderCreatedDTO;
 import org.leeknow.commonservice.order.dto.OrderWithPaymentDTO;
 import org.leeknow.commonservice.payment.dto.PaymentDTO;
+import org.leeknow.commonservice.user.dto.UserInfoDTO;
 import org.leeknow.orderservice.dto.OrderDTO;
 import org.leeknow.orderservice.entity.Order;
 import org.leeknow.commonservice.order.enums.OrderStatus;
@@ -30,14 +31,14 @@ public class OrderMapper {
         return order;
     }
 
-    public static OrderWithPaymentDTO mapToOrderWithPayment(Order order, PaymentDTO paymentDTO) {
+    public static OrderWithPaymentDTO mapToOrderWithPayment(Order order, PaymentDTO paymentDTO, UserInfoDTO userInfoDTO) {
         OrderWithPaymentDTO dto = new OrderWithPaymentDTO();
-        dto.setUserId(order.getUserId());
         dto.setOrderStatus(order.getOrderStatus());
         dto.setAmount(order.getAmount());
         dto.setItemId(order.getItemId());
         dto.setCreated(order.getCreated());
         dto.setPayment(paymentDTO);
+        dto.setUserInfo(userInfoDTO);
         return dto;
     }
 }

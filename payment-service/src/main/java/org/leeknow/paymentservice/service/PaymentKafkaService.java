@@ -3,37 +3,23 @@ package org.leeknow.paymentservice.service;
 import lombok.RequiredArgsConstructor;
 import org.leeknow.commonservice.order.dto.OrderCreatedDTO;
 import org.leeknow.commonservice.payment.dto.PaymentCreatedDTO;
-import org.leeknow.paymentservice.entity.Payment;
 import org.leeknow.commonservice.payment.enums.PaymentStatus;
-import org.leeknow.paymentservice.repository.PaymentRepository;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
-import java.util.concurrent.ThreadLocalRandom;
-
-import static org.leeknow.paymentservice.mapper.PaymentMapper.mapToCreatedDTO;
-import static org.leeknow.paymentservice.mapper.PaymentMapper.mapToEntity;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentKafkaService {
 
     private final KafkaTemplate<String, Object> template;
-    private final PaymentRepository repository;
+    private final PaymentService paymentService;
 
     @KafkaListener(topics = "order.created", groupId = "payment-service")
     public void receiveOrderCreated(OrderCreatedDTO dto) {
         System.out.println("received an order -> " + dto.toString());
 
-        Payment payment = mapToEntity(dto);
-
-        makePayment(payment);
-
-        payment = repository.save(payment);
-
-        PaymentCreatedDTO createdDTO = mapToCreatedDTO(payment);
+        PaymentCreatedDTO createdDTO = paymentService.processOrder(dto);
 
         sendCompletedPayment(createdDTO);
     }
@@ -46,16 +32,5 @@ public class PaymentKafkaService {
             topic = "payment.failed";
         }
         template.send(topic, payment.getPaymentId(), payment);
-    }
-
-    private void makePayment(Payment payment) {
-        boolean success = ThreadLocalRandom.current().nextInt(100) < 95;
-
-        if (success) {
-            payment.setStatus(PaymentStatus.SUCCESS);
-        } else {
-            payment.setStatus(PaymentStatus.FAILED);
-        }
-        payment.setCompleted(new Timestamp(System.currentTimeMillis()));
     }
 }

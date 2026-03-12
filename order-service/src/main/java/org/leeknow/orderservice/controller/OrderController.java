@@ -5,6 +5,8 @@ import org.leeknow.commonservice.order.dto.OrderWithPaymentDTO;
 import org.leeknow.orderservice.dto.OrderDTO;
 import org.leeknow.orderservice.service.OrderService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +17,9 @@ public class OrderController {
     private final OrderService service;
 
     @PostMapping
-    public ResponseEntity<?> saveOrder(@RequestBody OrderDTO orderDTO) {
-        service.save(orderDTO);
+    public ResponseEntity<?> saveOrder(@RequestBody OrderDTO orderDTO,
+                                       @AuthenticationPrincipal Jwt jwt) {
+        service.save(orderDTO, Integer.parseInt(jwt.getSubject()));
         return ResponseEntity.ok().build();
     }
 

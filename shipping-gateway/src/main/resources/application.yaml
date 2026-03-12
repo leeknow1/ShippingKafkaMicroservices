@@ -18,10 +18,14 @@ spring:
               uri: lb://order-service
               predicates:
                 - Path=/orders/**
-            - id: auth-service
+            - id: user-auth-service
               uri: lb://user-service
               predicates:
                 - Path=/auth/**
+            - id: user-service-main
+              uri: lb://user-service
+              predicates:
+                - Path=/users/**
             - id: file-service
               uri: lb://file-service
               predicates:

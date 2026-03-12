@@ -4,6 +4,18 @@ server:
 spring:
   application:
     name: order-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "http://localhost:8084/.well-known/jwks.json"
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connect-timeout: 300
+            read-timeout: 600
   datasource:
     url: jdbc:mysql://localhost:3306/orderservice?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root

@@ -28,6 +28,7 @@ public class Payment {
 
     private Timestamp completed;
 
+    @Column(unique = true)
     private Integer orderId;
 
     private Integer userId;
