@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum PaymentStatus {
     SUCCESS(1, "Успешно"),
-    FAILED(2, "Неуспешно")
+    FAILED(2, "Неуспешно"),
+    NOT_PROCESSED(3, "Не обработано")
     ;
 
     private final int id;

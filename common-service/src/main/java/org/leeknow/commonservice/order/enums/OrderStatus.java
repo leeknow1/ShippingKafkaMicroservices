@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum OrderStatus {
 
     CREATED(1, "Создано"),
-    COMPLETED(2, "Завершено")
+    COMPLETED(2, "Завершено"),
+    PAYED(3, "Оплачено")
     ;
 
     private final int id;

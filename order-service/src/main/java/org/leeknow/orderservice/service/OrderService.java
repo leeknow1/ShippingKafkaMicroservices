@@ -2,6 +2,7 @@ package org.leeknow.orderservice.service;
 
 import org.leeknow.commonservice.order.dto.OrderCreatedDTO;
 import org.leeknow.commonservice.order.dto.OrderWithPaymentDTO;
+import org.leeknow.commonservice.order.enums.OrderStatus;
 import org.leeknow.commonservice.payment.dto.PaymentDTO;
 import org.leeknow.commonservice.user.dto.UserInfoDTO;
 import org.leeknow.orderservice.client.PaymentClient;
@@ -79,5 +80,11 @@ public class OrderService {
         PaymentDTO paymentDTO = paymentF.join();
 
         return mapToOrderWithPayment(order, paymentDTO, userInfoDTO);
+    }
+
+    public void updateStatus(int id, OrderStatus orderStatus) {
+        Order order = repository.findById(id).orElseThrow(RuntimeException::new); //TODO custom ex
+        order.setOrderStatus(orderStatus);
+        repository.save(order);
     }
 }

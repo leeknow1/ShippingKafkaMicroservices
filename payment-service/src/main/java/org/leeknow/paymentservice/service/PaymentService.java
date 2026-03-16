@@ -4,18 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.leeknow.commonservice.order.dto.OrderCreatedDTO;
 import org.leeknow.commonservice.payment.dto.PaymentCreatedDTO;
 import org.leeknow.commonservice.payment.dto.PaymentDTO;
-import org.leeknow.commonservice.payment.enums.PaymentStatus;
 import org.leeknow.paymentservice.entity.Payment;
 import org.leeknow.paymentservice.mapper.PaymentMapper;
 import org.leeknow.paymentservice.model.GetPaymentResponse;
 import org.leeknow.paymentservice.repository.PaymentRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ws.soap.SoapFaultException;
 
-import java.sql.Timestamp;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -26,6 +24,7 @@ import static org.leeknow.paymentservice.mapper.PaymentMapper.*;
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;
+    private final PaymentTransferService transferService;
 
     private final ConcurrentHashMap<String, ReentrantLock> locks = new ConcurrentHashMap<>();
 
@@ -43,6 +42,7 @@ public class PaymentService {
         throw new SoapFaultException("payment.not_found");
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public PaymentCreatedDTO processOrder(OrderCreatedDTO dto) {
         String orderId = dto.getOrderId();
 
@@ -62,9 +62,11 @@ public class PaymentService {
          }
 
          Payment payment = mapToEntity(dto);
-         makePayment(payment);
 
          payment = paymentRepository.save(payment);
+
+         transferService.updateOrderStatus(payment);
+
          return mapToCreatedDTO(payment);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -77,15 +79,5 @@ public class PaymentService {
                 locks.remove(orderId, reentrantLock);
             }
         }
-    }
-
-    private void makePayment(Payment payment) {
-        boolean success = ThreadLocalRandom.current().nextInt(100) < 95;
-        if (success) {
-            payment.setStatus(PaymentStatus.SUCCESS);
-        } else {
-            payment.setStatus(PaymentStatus.FAILED);
-        }
-        payment.setCompleted(new Timestamp(System.currentTimeMillis()));
     }
 }

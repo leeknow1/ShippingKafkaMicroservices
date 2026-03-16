@@ -3,6 +3,7 @@ package org.leeknow.paymentservice.mapper;
 import org.leeknow.commonservice.order.dto.OrderCreatedDTO;
 import org.leeknow.commonservice.payment.dto.PaymentCreatedDTO;
 import org.leeknow.commonservice.payment.dto.PaymentDTO;
+import org.leeknow.commonservice.payment.enums.PaymentStatus;
 import org.leeknow.paymentservice.entity.Payment;
 import org.leeknow.paymentservice.model.GetPaymentResponse;
 
@@ -19,6 +20,7 @@ public class PaymentMapper {
         payment.setCreated(new Timestamp(System.currentTimeMillis()));
         payment.setOrderId(Integer.valueOf(dto.getOrderId()));
         payment.setUserId(dto.getUserId());
+        payment.setStatus(PaymentStatus.NOT_PROCESSED);
         return payment;
     }
 

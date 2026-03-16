@@ -2,6 +2,7 @@ package org.leeknow.orderservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.leeknow.commonservice.order.dto.OrderWithPaymentDTO;
+import org.leeknow.commonservice.order.enums.OrderStatus;
 import org.leeknow.orderservice.dto.OrderDTO;
 import org.leeknow.orderservice.service.OrderService;
 import org.springframework.http.ResponseEntity;
@@ -30,5 +31,11 @@ public class OrderController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(orderWithPaymentDTO);
+    }
+
+    @PostMapping("/{id}/update-status")
+    public ResponseEntity<?> updateStatus(@PathVariable int id, @RequestBody OrderStatus orderStatus) {
+        service.updateStatus(id, orderStatus);
+        return ResponseEntity.ok().build();
     }
 }
